@@ -2,4 +2,9 @@
 
 
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+
+
+
+
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)

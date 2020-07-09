@@ -11,17 +11,53 @@ knitr::opts_chunk$set(
 ```{r echo=FALSE}
 # 175 miles per activity ofr 90 days = 1.944 miles per day
 library(readr)
-library(dplyr)
+# library(dplyr)
 library(ggplot2)
-x <- read_csv("data.csv")
-x <- arrange(x, date) %>% 
-  group_by(activity) %>% 
-  mutate(distance_cum = cumsum(na.omit(distance_miles))) %>% 
-  ungroup()
+# x <- read_csv("data.csv")
+# x <- arrange(x, date) %>% 
+#   group_by(activity) %>% 
+#   mutate(distance_cum = cumsum(na.omit(distance_miles))) %>% 
+#   ungroup()
 # x <- group_by(x, name, activity) %>% 
 #   mutate(distance_cum = cumsum(distance_miles)) %>% 
 #   ungroup()
 ```
+
+```{r echo=FALSE}
+# ggplot(x, aes(date, distance_cum, color = activity)) +
+#   geom_line() + 
+#   annotate("text", x=Sys.Date(), y=1.944*as.integer((Sys.Date()-as.Date("2020-07-01"))), label="-goal") +
+#   theme_grey(base_size = 20)
+#   # facet_grid(rows = vars(name))
+```
+
+```{r echo=FALSE}
+library(googlesheets4)
+library(dplyr)
+
+# auth
+# sheets_auth_configure()
+options(gargle_oauth_email="myrmecocystus@gmail.com")
+# getOption("gargle_oauth_email")
+gs4_auth(path = "~/.R/gargle/credentials.json")
+
+# create sheetsid thing
+sheetid <- as_sheets_id("1tk9FUbR4_TaDqfjv7XfUSkZNr7oI_AkF_vGdsVd4gXE")
+# read
+x <- range_read(sheetid)
+
+# manipulate
+dates=rep(seq(from=as.Date("2020-07-01"), to=Sys.Date(), "days"), each=2)
+z <- data.frame(name = NA, date = dates,
+  activity = c("run","bike"), distance_miles = 0, time_min = NA)
+df <- bind_rows(x, z[!z$date %in% as.Date(x$date), ])
+x <- arrange(df, date) %>% 
+  group_by(activity) %>% 
+  mutate(distance_cum = cumsum(na.omit(distance_miles))) %>% 
+  ungroup()
+x$date <- as.Date(x$date)
+```
+
 
 ```{r echo=FALSE}
 ggplot(x, aes(date, distance_cum, color = activity)) +
