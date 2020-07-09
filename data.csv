@@ -1,0 +1,16 @@
+name,activity,date,distance_miles,time_min
+NA,run,2020-07-01,0,NA
+NA,bike,2020-07-01,0,NA
+NA,run,2020-07-02,0,NA
+NA,bike,2020-07-02,0,NA
+NA,run,2020-07-04,0,NA
+NA,bike,2020-07-04,0,NA
+NA,run,2020-07-06,0,NA
+NA,bike,2020-07-06,0,NA
+NA,run,2020-07-08,0,NA
+NA,bike,2020-07-08,0,NA
+katherine,run,2020-07-03,3.5,86
+katherine,run,2020-07-05,2.2,24
+scott,run,2020-07-03,3.5,86
+scott,bike,2020-07-05,30.1,113
+scott,bike,2020-07-07,21.1,75
