@@ -7,4 +7,4 @@
 
 
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk plot](figure/plot-1.png)

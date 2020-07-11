@@ -59,7 +59,7 @@ x$date <- as.Date(x$date)
 ```
 
 
-```{r echo=FALSE}
+```{r plot, echo=FALSE}
 ggplot(x, aes(date, distance_cum, color = activity)) +
   geom_line() + 
   annotate("text", x=Sys.Date(), y=1.944*as.integer((Sys.Date()-as.Date("2020-07-01"))), label="-goal") +
