@@ -10,9 +10,8 @@ knitr::opts_chunk$set(
 
 ```{r echo=FALSE}
 # 175 miles per activity ofr 90 days = 1.944 miles per day
-library(readr)
+# library(readr)
 # library(dplyr)
-library(ggplot2)
 # x <- read_csv("data.csv")
 # x <- arrange(x, date) %>% 
 #   group_by(activity) %>% 
@@ -34,13 +33,16 @@ library(ggplot2)
 ```{r echo=FALSE}
 library(googlesheets4)
 library(dplyr)
+library(ggplot2)
 
 # auth
 # sheets_auth_configure()
-options(gargle_oauth_email="myrmecocystus@gmail.com")
+# options(gargle_oauth_email="myrmecocystus@gmail.com")
 # getOption("gargle_oauth_email")
-gs4_auth(path = "~/.R/gargle/credentials.json")
+# gs4_auth(path = "~/.R/gargle/credentials.json")
 
+# deauth
+gs4_deauth()
 # create sheetsid thing
 sheetid <- as_sheets_id("1tk9FUbR4_TaDqfjv7XfUSkZNr7oI_AkF_vGdsVd4gXE")
 # read
