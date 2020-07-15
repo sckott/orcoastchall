@@ -1,10 +1,10 @@
 on: push
 
-name: Render README
+name: Re-make plot
 
 jobs:
   render:
-    name: Render README
+    name: Re-make plot
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,7 +12,13 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install R deps
         run: Rscript -e 'install.packages(c("knitr", "ggplot2", "dplyr", "googlesheets4"))'
-      - name: Render README
+      - name: Cache R packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+      - name: Re-make plot
         run: Rscript -e 'knitr::knit("README.Rmd")'
       - name: Commit results
         run: |
