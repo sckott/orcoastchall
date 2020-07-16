@@ -62,12 +62,11 @@ x$date <- as.Date(x$date)
 # make goal data.frame
 goal <- data.frame(date = unique(x$date), distance = 1.944)
 goal <- mutate(goal, distance_cum = cumsum(distance))
+```
 
-# plot
+```{r plot, echo=FALSE}
 ggplot() +
   geom_line(aes(date, distance_cum, color = activity), data = x) +
-  # annotate("text", x=Sys.Date(), y=1.944*as.integer((Sys.Date()-as.Date("2020-07-01"))), label="-goal") +
-  # geom_line(aes(date, distance_cum), data = goal) +
   geom_smooth(aes(date, distance_cum), data = goal, se = FALSE, method = "lm", color = "blue") +
   annotate("text", x=Sys.Date(), y=1.944*as.integer((Sys.Date()-as.Date("2020-07-01"))), label="goal", color="blue") +
   theme_grey(base_size = 20)
